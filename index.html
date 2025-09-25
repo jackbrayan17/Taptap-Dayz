@@ -311,15 +311,26 @@
 
       <div class="grid-fit" style="margin-top:16px">
         <article class="card fade-up">
+          <h3>09:00 — Ouverture & stands</h3>
+          <p class="small">Visite des exposants, découverte de produits locaux et partenaires.</p>
+          <div style="margin-top:10px"><button class="btn btn-outline" onclick="scrollToSection('inscription')">Participer</button></div>
           <h3>09:00 — Marche sportive (5 km)</h3>
           <p class="small">Ouvert à tous — inscrivez-vous et récupérez votre dossard.</p>
           <div style="margin-top:10px"><button class="btn btn-accent" onclick="scrollToSection('inscription')">S'inscrire</button></div>
         </article>
+
+        <article class="card fade-up">
+          <h3>11:00 — Talks & Ateliers</h3>
          <article class="card fade-up">
           <h3>13:30 — Talks & Ateliers</h3>
           <p class="small">Sessions sur transferts d'argent, fintech pour entrepreneurs et sécurité digitale.</p>
           <div style="margin-top:10px"><button class="btn btn-primary" onclick="scrollToSection('inscription')">Réserver un siège</button></div>
         </article>
+
+        <article class="card fade-up">
+          <h3>15:00 — Marche sportive (5 km)</h3>
+          <p class="small">Ouvert à tous — inscrivez-vous et récupérez votre dossard.</p>
+          <div style="margin-top:10px"><button class="btn btn-accent" onclick="scrollToSection('inscription')">S'inscrire</button></div>
 <article class="card fade-up">
           <h3>15:00 — Ouverture & stands</h3>
           <p class="small">Visite des exposants, découverte de produits locaux et partenaires.</p>
@@ -336,16 +347,21 @@
 
       <div class="grid-fit" style="margin-top:16px">
         <article class="card speaker fade-up">
+          <div class="avatar" aria-hidden="true">AB</div>
           <div class="avatar" aria-hidden="true">FO</div>
           <div>
+            <h4>Abdou K. — Fondateur</h4>
+            <p class="small">Fintech & inclusion financière</p>
             <h4>Fatimatou O. — Co-Fondateur</h4>
             <p class="small">Branding & Marketing Digital</p>
           </div>
         </article>
 
         <article class="card speaker fade-up">
+          <div class="avatar" aria-hidden="true">MJ</div>
           <div class="avatar" aria-hidden="true">NB</div>
           <div>
+            <h4>Maya J. — Influenceuse</h4>
             <h4>Ndockbidi — Influenceur</h4>
             <p class="small">Community building et storytelling</p>
           </div>
@@ -411,6 +427,7 @@
 
         <aside class="card fade-up">
           <h3>Infos pratiques</h3>
+          <p class="small"><strong>Date :</strong> 5 Octobre 2025 · <strong>Lieu :</strong> Parc Central, Yaoundé</p>
           <p class="small"><strong>Date :</strong> 19 au 21 Decembre 2025 · <strong>Lieu :</strong> College Vogt, Yaoundé</p>
           <p class="small"><strong>Contact orga :</strong> <a href="mailto:dayz@taptapsend.com">dayz@taptapsend.com</a></p>
           <div style="margin-top:12px">
@@ -491,12 +508,14 @@ Rejoins Taptap Send — utilise le code #TAPTAPDAYZ237 et reçois 5€ à l'insc
           <a href="#" aria-label="Instagram" style="display:inline-flex; align-items:center; justify-content:center; width:40px;height:40px;border-radius:8px;background:var(--secondary); color:var(--primary)"><i class="fa fa-instagram"></i></a>
           <a href="#" aria-label="Twitter" style="display:inline-flex; align-items:center; justify-content:center; width:40px;height:40px;border-radius:8px;background:var(--secondary); color:var(--primary)"><i class="fa fa-twitter"></i></a>
         </div>
+        <div class="small">Partenaires : Dovv, Santa Lucia</div>
         <div class="small">Partenaires : Nestle, Source de Pays</div>
       </div>
     </div>
 
     <div style="max-width:var(--maxW); margin:18px auto 0; padding:12px 18px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:.9rem">
       <div>© Taptap Dayz — 2025</div>
+      <div>Design by <strong>Team</strong> · Built with ❤️</div>
       <div>Design by <strong>HACKAT'ONES</strong> · Built with ❤️</div>
     </div>
   </footer>
@@ -540,33 +559,32 @@ Rejoins Taptap Send — utilise le code #TAPTAPDAYZ237 et reçois 5€ à l'insc
     closeOverlayOnNav();
 
     // ---------- Countdown ----------
-    // 📅 Date de l'événement : 19 décembre de l'année en cours
-    const currentYear = new Date().getFullYear();
-    const eventDate = new Date(`${currentYear}-12-19T00:00:00`).getTime();
+    (function(){
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minsEl = document.getElementById('cd-mins');
+      const secsEl = document.getElementById('cd-secs');
 
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minsEl = document.getElementById("minutes");
-    const secsEl = document.getElementById("seconds");
+      // Set explicit event date here if you want; default: 10 days from now
+      const eventDate = new Date();
+      eventDate.setDate(eventDate.getDate() + 10);
+      eventDate.setHours(9,0,0,0);
 
-    function update() {
-      const now = new Date().getTime();
-      const diff = Math.max(0, eventDate - now);
-
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-      daysEl.textContent = String(d).padStart(2, "0");
-      hoursEl.textContent = String(h).padStart(2, "0");
-      minsEl.textContent = String(m).padStart(2, "0");
-      secsEl.textContent = String(s).padStart(2, "0");
-    }
-
-    update(); // premier appel direct
-    setInterval(update, 1000); // mise à jour chaque seconde
-  })();
+      function update(){
+        const now = new Date();
+        const diff = Math.max(0, eventDate - now);
+        const d = Math.floor(diff / (1000*60*60*24));
+        const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+        const s = Math.floor((diff % (1000*60)) / 1000);
+        daysEl.textContent = String(d).padStart(2,'0');
+        hoursEl.textContent = String(h).padStart(2,'0');
+        minsEl.textContent = String(m).padStart(2,'0');
+        secsEl.textContent = String(s).padStart(2,'0');
+      }
+      update();
+      setInterval(update, 1000);
+    })();
 
     // ---------- Promo copy + share ----------
     function copyPromo(){
@@ -613,6 +631,7 @@ Rejoins Taptap Send — utilise le code #TAPTAPDAYZ237 et reçois 5€ à l'insc
 
     // ---------- WhatsApp prefill ----------
     function openWhatsApp(){
+      const phone = '+23700000000'; // remplace par le vrai numéro
       const phone = '+237694103585'; // remplace par le vrai numéro
       const txt = `Bonjour, je souhaite m'inscrire au Taptap Dayz et recevoir le code promo #TAPTAPDAYZ237.`;
       window.open(`https://wa.me/${phone.replace(/\\D/g,'')}?text=${encodeURIComponent(txt)}`, '_blank');
