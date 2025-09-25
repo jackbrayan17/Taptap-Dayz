@@ -1,399 +1,362 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <!-- ================== SEO / META ================== -->
+  <!-- ================== META / SEO ================== -->
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Taptap Dayz — Foire & Marche Sportive | #TAPTAPDAYZ237</title>
   <meta name="description" content="Taptap Dayz — Foire communautaire & marche sportive. Programme, intervenants, galerie, et code promo #TAPTAPDAYZ237 : téléchargez Taptap Send et recevez 5€." />
-  <link rel="canonical" href="https://example.com/taptap-dayz" />
   <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://example.com/taptap-dayz" />
   <!-- Open Graph -->
   <meta property="og:title" content="Taptap Dayz — Foire & Marche Sportive" />
   <meta property="og:description" content="Programme, intervenants, galerie et code promo #TAPTAPDAYZ237 — Recevez 5€ après inscription." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Taptap+Dayz" />
-  <!-- Twitter card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Taptap Dayz — Foire & Marche Sportive" />
-  <meta name="twitter:description" content="Programme, intervenants, galerie et code promo #TAPTAPDAYZ237 — Recevez 5€ après inscription." />
-  <!-- Structured data (Event + Organization) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Event",
-    "name":"Taptap Dayz — Foire & Marche Sportive",
-    "startDate":"2025-10-05T09:00:00+01:00",
-    "endDate":"2025-10-05T18:00:00+01:00",
-    "eventStatus":"https://schema.org/EventScheduled",
-    "location":{"@type":"Place","name":"Parc Central, Yaoundé","address":"Yaoundé, Cameroun"},
-    "description":"Foire communautaire et marche sportive pour rapprocher la diaspora et la communauté locale. Stand d'information Taptap Send, démonstrations, concerts et atelier.",
-    "image":["https://via.placeholder.com/1200x800.png?text=Taptap+Dayz"]
-  }
-  </script>
 
   <!-- ================== FONTS & ICONS ================== -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <!-- Font Awesome CDN -->
-  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="" crossorigin="anonymous" />
 
-  <!-- ================== STYLES ================== -->
+  <!-- ================== THEME VARIABLES & STYLES (MOBILE FIRST) ================== -->
   <style>
+    /* ---------- Color system (YOUR palette) ---------- */
     :root{
-      --bg:#0b1020;
-      --muted:#98a0b3;
-      /* TapTap-like gradient palette - adjust if you have exact brand hexes */
-      --brand-a:#ff2878; /* vibrant magenta/pink */
-      --brand-b:#ff7a1a; /* warm orange */
-      --accent: linear-gradient(135deg,var(--brand-a),var(--brand-b));
-      --glass: rgba(255,255,255,0.06);
-      --glass-2: rgba(255,255,255,0.04);
+      --primary: #00382F;   /* Deep Teal */
+      --secondary: #B7E4C5; /* Light green */
+      --accent: #EE3934;    /* Pomegranate red */
+      --bg: #ffffff;        /* white background (logo-friendly) */
+      --muted: #5f6b66;
+      --glass: rgba(0,56,47,0.04);
       --radius: 14px;
-      --max-width:1200px;
+      --maxW: 1200px;
+      --ui-padding: 18px;
+
+      /* Responsive type scales */
+      --h1: clamp(1.6rem, 3.6vw, 2.6rem);
+      --h2: clamp(1.25rem, 2.6vw, 1.8rem);
+      --body: clamp(.95rem, 1.8vw, 1rem);
+      --thin-shadow: 0 8px 30px rgba(2,10,8,0.06);
+      --glass-border: 1px solid rgba(0,0,0,0.06);
     }
 
+    /* ---------- Base ---------- */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      color: #e8eef8;
-      background: linear-gradient(180deg,#061022 0%, #071428 60%, #071a2b 100%);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: #08362f;
       -webkit-font-smoothing:antialiased;
       line-height:1.45;
       -webkit-tap-highlight-color: transparent;
+      -moz-osx-font-smoothing:grayscale;
     }
-
     a{color:inherit;text-decoration:none}
-    img{max-width:100%;height:auto;display:block}
+    img{display:block;max-width:100%;height:auto}
 
     /* layout container */
-    .container{
-      max-width:var(--max-width);
-      margin:0 auto;
-      padding:20px;
-    }
+    .container{max-width:var(--maxW); margin:0 auto; padding:18px}
 
-    /* ========== NAVBAR ========== */
-    .nav {
-      position:sticky; top:0; z-index:80;
-      backdrop-filter: blur(8px);
-      background: linear-gradient(180deg, rgba(11,16,32,0.6), rgba(11,16,32,0.35));
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+    /* ---------- NAVBAR (sticky) ---------- */
+    header.site-header{
+      position:sticky; top:0; z-index:120;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+      border-bottom: var(--glass-border);
+      backdrop-filter: blur(6px);
     }
-    .nav-inner{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-      max-width:var(--max-width); margin:0 auto; padding:12px 20px;
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 18px; max-width:var(--maxW); margin:0 auto}
+    .brand{display:flex; align-items:center; gap:12px; cursor:pointer}
+    .logo{
+      width:56px; height:56px; border-radius:10px; display:grid; place-items:center;
+      background: #fff; border:2px solid var(--primary); box-shadow: var(--thin-shadow);
+      font-weight:800; color:var(--primary)
     }
-    .brand{
-      display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:0.2px;
-    }
-    .logo-sigil{
-      width:44px; height:44px; border-radius:10px;
-      background: var(--accent);
-      box-shadow: 0 6px 18px rgba(255,110,120,0.12), inset 0 -6px 18px rgba(255,255,255,0.06);
-      display:grid; place-items:center; color:white; font-weight:800;
-    }
-    nav ul{display:flex; gap:18px; align-items:center; margin:0; padding:0; list-style:none}
-    nav a{padding:8px 10px; border-radius:10px; transition:all .25s ease}
-    nav a:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.45)}
+    .brand .title{line-height:1}
+    .brand .org{font-weight:800; color:var(--primary); font-size:1rem}
+    .brand .tag{color:var(--muted); font-size:.85rem}
 
-    /* hamburger for small screens */
-    .hamburger{
-      display:none;
-      width:44px; height:44px; border-radius:10px; background:var(--glass);
-      align-items:center; justify-content:center; cursor:pointer;
-    }
-    .hamburger i{font-size:18px}
+    nav.primary-nav{display:flex; align-items:center; gap:10px}
+    nav ul{display:flex; gap:6px; margin:0; padding:0; list-style:none; align-items:center}
+    nav a{padding:8px 12px; border-radius:10px; transition:all .22s ease; color:var(--primary)}
+    nav a:hover, nav a:focus{background:linear-gradient(90deg,var(--secondary),#eaf8ef); transform:translateY(-3px)}
 
-    /* hero */
-    .hero{
-      padding:64px 20px 36px;
-      display:grid; gap:28px;
-      grid-template-columns: 1fr 480px;
-      align-items:center;
-    }
-    @media (max-width:1000px){
-      .hero{grid-template-columns:1fr 1fr}
-    }
-    @media (max-width:820px){
-      .hero{grid-template-columns:1fr; padding-top:36px}
-    }
-
-    .hero-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:28px; border-radius:var(--radius); box-shadow:0 12px 40px rgba(2,6,23,0.65);
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    .kicker{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.04); color:var(--brand-b); font-weight:700}
-    h1{font-size:2rem; margin:12px 0 6px; line-height:1.05}
-    p.lead{color:var(--muted); margin:0 0 16px}
-
-    .cta-row{display:flex; gap:12px; flex-wrap:wrap}
+    .cta-compact{display:flex; gap:8px; align-items:center}
     .btn{
-      display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:12px; cursor:pointer;
+      display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:10px; cursor:pointer;
       font-weight:700; letter-spacing:0.2px; border:none;
-      background:var(--brand-a); color:white; box-shadow: 0 10px 30px rgba(255,40,120,0.12);
-      transition:transform .22s ease,box-shadow .22s ease;
+      transition:transform .22s ease, box-shadow .22s ease;
     }
-    .btn.secondary{
-      background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-weight:700;
+    .btn-primary{background: linear-gradient(90deg,var(--primary), #005542); color:white; box-shadow: 0 10px 30px rgba(0,56,47,0.12)}
+    .btn-outline{background:transparent; border:1px solid rgba(0,56,47,0.08); color:var(--primary)}
+    .btn-accent{background:var(--accent); color:white; border-radius:12px}
+    .btn:focus{outline:3px solid rgba(183,228,197,0.25); outline-offset:2px}
+
+    /* hamburger */
+    .hamburger{display:flex; align-items:center; justify-content:center; width:46px; height:46px; border-radius:10px; background:var(--glass); border:1px solid rgba(0,0,0,0.03); cursor:pointer}
+    .hamburger i{font-size:18px; color:var(--primary)}
+
+    /* mobile overlay menu */
+    .overlay-menu{position:fixed; inset:0; background:linear-gradient(180deg, rgba(0,56,47,0.95), rgba(0,56,47,0.96)); color:white; display:none; z-index:200; padding:28px}
+    .overlay-menu.open{display:block}
+    .overlay-menu nav{margin-top:24px}
+    .overlay-menu a{display:block; padding:14px 0; font-size:1.1rem; border-bottom:1px solid rgba(255,255,255,0.04)}
+
+    /* ---------- HERO (mobile-first) ---------- */
+    .hero{
+      display:grid; gap:18px; padding:28px 18px;
+      grid-template-columns: 1fr;
+      align-items:start;
     }
-    .btn:hover{transform:translateY(-4px)}
+    .hero-card{padding:18px; border-radius:16px; background:linear-gradient(180deg, rgba(183,228,197,0.12), rgba(0,56,47,0.03)); border:1px solid rgba(0,56,47,0.06); box-shadow:var(--thin-shadow)}
+    .kicker{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(0,56,47,0.08); color:var(--primary); font-weight:700; font-size:.85rem}
+    h1{font-size:var(--h1); margin:12px 0 8px; color:var(--primary)}
+    p.lead{color:var(--muted); margin:0 0 14px; font-size:var(--body)}
+
+    .grid-2-responsive{display:grid; gap:14px}
+    .cta-row{display:flex; gap:10px; flex-wrap:wrap}
 
     /* countdown */
-    .countdown{display:flex; gap:8px; align-items:center}
-    .countdown .slot{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02)); padding:12px 14px; border-radius:12px; min-width:72px; text-align:center}
-    .slot .num{font-weight:800; font-size:1.4rem}
-    .slot .lbl{font-size:.75rem; color:var(--muted)}
+    .countdown{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .countdown .slot{background:white;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.04); text-align:center; min-width:60px}
+    .slot .num{font-weight:800; font-size:1.2rem; color:var(--primary)}
+    .slot .lbl{font-size:.72rem;color:var(--muted); text-transform:uppercase; letter-spacing:.6px}
 
-    /* right column with promo card */
-    .promo{
-      padding:20px; border-radius:12px; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    .promo .promo-code{font-size:1.1rem; font-weight:900; letter-spacing:0.6px; padding:8px 12px; border-radius:8px; background:linear-gradient(90deg,var(--brand-b),var(--brand-a)); color:white; display:inline-block}
+    /* promo card */
+    .promo-card{padding:14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.98), rgba(183,228,197,0.06)); border:1px solid rgba(0,0,0,0.04)}
+    .promo-code{display:inline-block;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,var(--secondary), #eaf8ef); color:var(--primary); font-weight:900}
 
-    /* sections */
-    section{padding:56px 20px}
-    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
-    @media (max-width:900px){
-      .grid-3{grid-template-columns:1fr}
-      .grid-2{grid-template-columns:1fr}
-      nav ul{display:none}
-      .hamburger{display:flex}
-    }
+    /* ---------- SECTIONS ---------- */
+    section{padding:40px 18px}
+    .section-title{font-size:var(--h2); color:var(--primary); margin-bottom:8px}
+    .small{color:var(--muted); font-size:.95rem}
 
-    .card{background:var(--glass); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+    /* grid helper (auto-fit) */
+    .grid-fit{display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))}
+
+    .card{padding:14px; background: #fff; border-radius:12px; border:1px solid rgba(0,0,0,0.04); box-shadow: var(--thin-shadow)}
     .speaker{display:flex; gap:12px; align-items:center}
-    .speaker .avatar{width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#ccc,#aaa); display:grid;place-items:center; font-weight:800}
-    .speaker h4{margin:0;font-size:1rem}
-    .speaker p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+    .avatar{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--secondary), #eaf8ef); display:grid;place-items:center; color:var(--primary); font-weight:800}
 
-    /* gallery placeholders */
-    .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-    .img-placeholder{height:160px;border-radius:12px; background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); display:grid; place-items:center; color:var(--muted); font-weight:700}
-    @media (max-width:900px){ .gallery{grid-template-columns:repeat(2,1fr)} }
+    .gallery{display:grid; gap:10px; grid-template-columns: repeat(auto-fit, minmax(120px,1fr))}
+    .img-placeholder{height:140px; border-radius:10px; background:linear-gradient(135deg,#f6fff7, #eaf8ef); display:grid; place-items:center; color:var(--muted); font-weight:700}
 
-    /* registration form */
+    /* forms */
     form{display:flex; flex-direction:column; gap:10px}
-    input,textarea,select{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04); background:transparent; color:inherit}
-    label{font-size:.85rem;color:var(--muted)}
-    .small{font-size:.85rem;color:var(--muted)}
-
-    /* microsite promo section */
-    .promo-steps{display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap}
-    .step{flex:1; min-width:190px; padding:14px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));}
+    input,textarea,select{padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06); background:transparent; color:var(--primary)}
+    label{font-size:.88rem;color:var(--muted)}
 
     /* testimonials */
-    .testi{display:grid; gap:12px}
-    .testi .quote{font-style:italic; color:var(--muted);}
+    .testi .quote{font-style:italic;color:var(--muted)}
 
     /* footer */
-    footer{
-      margin-top:36px; padding:40px 20px; background:linear-gradient(180deg, rgba(8,12,24,0.9), rgba(6,9,18,0.95));
-      border-top:1px solid rgba(255,255,255,0.03);
+    footer.site-footer{background: linear-gradient(180deg, #f7fff8, #eefaf0); border-top:1px solid rgba(0,0,0,0.04); padding:28px 18px}
+    .footer-grid{display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); max-width:var(--maxW); margin:0 auto}
+
+    /* floating CTA (bottom-right) */
+    .floating-cta{position:fixed; right:18px; bottom:18px; z-index:140; display:grid; gap:8px}
+    .floating-cta .fab{width:56px;height:56px;border-radius:999px; display:grid; place-items:center; font-size:18px; color:white; background:var(--accent); box-shadow: 0 14px 40px rgba(238,57,52,0.18); cursor:pointer}
+    .floating-cta .mini{background:linear-gradient(90deg,var(--primary), #006854); color:white; padding:10px 12px; border-radius:10px; font-weight:800; display:none}
+
+    /* bottom sticky CTA for mobile */
+    .sticky-bottom-cta{display:none; position:fixed; left:0; right:0; bottom:0; background: linear-gradient(90deg,var(--primary), #005542); color:white; padding:10px; z-index:150; justify-content:space-between; align-items:center; gap:12px}
+    .sticky-bottom-cta button{background:transparent; border:0; color:white; font-weight:800}
+
+    /* small effects */
+    .fade-up{opacity:0; transform:translateY(8px); transition:opacity .6s ease, transform .6s ease}
+    .in-view{opacity:1; transform:none}
+
+    /* page-level spacing for large screens */
+    @media(min-width:900px){
+      .hero{grid-template-columns: 1fr 380px; gap:26px; padding:48px 18px}
+      .grid-2-responsive{grid-template-columns:1fr 1fr}
+      .promo-card{position:sticky; top:92px}
+      .floating-cta .mini{display:block}
+      .hamburger{display:none}
+      nav.primary-nav{display:block}
     }
-    .footer-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; max-width:var(--max-width); margin:0 auto}
-    .socials a{display:inline-flex; align-items:center; justify-content:center; width:40px;height:40px;border-radius:10px;margin-right:8px;background:var(--glass-2); color:inherit}
 
-    /* small touches & animations */
-    .fade-in{animation:fadeIn .8s ease both}
-    @keyframes fadeIn{ from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
-
-    .float-card{transition:transform .35s cubic-bezier(.2,.9,.2,1); will-change:transform}
-    .float-card:hover{transform:translateY(-8px) rotate(-.5deg) scale(1.01)}
-
-    /* smooth scroll behavior */
-    html {scroll-behavior:smooth}
-
-    /* responsive utilities */
-    .hide-mobile{display:inline-block}
-    @media (max-width:900px){ .hide-mobile{display:none} }
-
-    /* micro animations for links */
-    a[data-fade] { position:relative; overflow:visible }
-    a[data-fade]::after{
-      content:""; position:absolute; left:0; bottom:-6px; height:3px; width:0; background:linear-gradient(90deg,var(--brand-a),var(--brand-b)); border-radius:3px; transition:width .28s ease;
+    /* very large */
+    @media(min-width:1400px){
+      .hero{grid-template-columns: 1fr 480px; padding:64px 18px}
+      .logo{width:64px;height:64px}
     }
-    a[data-fade]:hover::after{ width:100% }
 
-    /* small screens adjustments */
-    @media (max-width:460px){
-      h1{font-size:1.6rem}
-      .hero{padding:28px 12px}
+    /* mobile-only CTA bar */
+    @media(max-width:640px){
+      .sticky-bottom-cta{display:flex}
+      .floating-cta .mini{display:none}
     }
   </style>
 </head>
 <body>
 
-  <!-- ================== NAVBAR ================== -->
-  <header class="nav" role="banner" aria-label="Navigation principale">
-    <div class="nav-inner">
-      <div class="brand" onclick="goTop()" style="cursor:pointer">
-        <div class="logo-sigil">TD</div>
-        <div>
-          <div style="font-size:.9rem;color:var(--muted)">Taptap</div>
-          <div style="font-size:.95rem">Dayz — Foire & Marche</div>
+  <!-- ================== HEADER / NAV ================== -->
+  <header class="site-header" role="banner" aria-label="Navigation principale">
+    <div class="nav-inner container">
+      <div class="brand" onclick="goTop()" aria-label="Aller en haut">
+        <div class="logo" aria-hidden="true">TD</div>
+        <div class="title">
+          <div class="org">Taptap Dayz</div>
+          <div class="tag">Foire & Marche — Yaoundé</div>
         </div>
       </div>
 
-      <nav role="navigation" aria-label="Menu principal">
+      <nav class="primary-nav" aria-label="Menu principal">
         <ul>
-          <li><a href="#programme" data-fade>Programme</a></li>
-          <li><a href="#intervenants" data-fade>Intervenants</a></li>
-          <li><a href="#galerie" data-fade>Galerie</a></li>
-          <li><a href="#inscription" data-fade>Inscription</a></li>
-          <li><a href="#promo" data-fade>Code Promo</a></li>
+          <li><a href="#programme">Programme</a></li>
+          <li><a href="#intervenants">Intervenants</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#inscription">Inscription</a></li>
+          <li><a href="#promo">Promo</a></li>
         </ul>
       </nav>
 
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="hide-mobile small">Événement gratuit · Yaoundé</div>
-        <div class="hamburger" id="hambtn" aria-label="Ouvrir le menu" aria-expanded="false">
-          <i class="fa fa-bars"></i>
-        </div>
+      <div class="cta-compact">
+        <div class="hide-mobile small" style="color:var(--muted); font-size:.9rem">5 Oct 2025 · Parc Central</div>
+        <button class="btn btn-outline" onclick="scrollToSection('inscription')" aria-label="S'inscrire">S'inscrire</button>
+        <button class="btn btn-primary" onclick="copyPromo()" aria-label="Copier le code promo">Get Code</button>
+        <div class="hamburger" id="hambtn" aria-label="Menu" aria-expanded="false"><i class="fa fa-bars"></i></div>
       </div>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mobileMenu" style="display:none; padding:12px 20px;">
-      <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
-        <li><a href="#programme">Programme</a></li>
-        <li><a href="#intervenants">Intervenants</a></li>
-        <li><a href="#galerie">Galerie</a></li>
-        <li><a href="#inscription">Inscription</a></li>
-        <li><a href="#promo">Code Promo</a></li>
-      </ul>
+    <!-- Overlay mobile menu -->
+    <div id="overlayMenu" class="overlay-menu" aria-hidden="true">
+      <div style="display:flex; justify-content:space-between; align-items:center">
+        <div style="display:flex; gap:12px; align-items:center"><div class="logo" style="width:48px;height:48px">TD</div><div><strong>Taptap Dayz</strong><div style="font-size:.85rem;color:rgba(255,255,255,0.85)">Yaoundé · 5 Oct</div></div></div>
+        <button onclick="toggleOverlay(false)" style="background:transparent;border:0;color:white;font-size:20px" aria-label="Fermer le menu"><i class="fa fa-times"></i></button>
+      </div>
+
+      <nav aria-label="Menu mobile">
+        <a href="#programme" onclick="toggleOverlay(false)">Programme</a>
+        <a href="#intervenants" onclick="toggleOverlay(false)">Intervenants</a>
+        <a href="#galerie" onclick="toggleOverlay(false)">Galerie</a>
+        <a href="#inscription" onclick="toggleOverlay(false)">Inscription</a>
+        <a href="#promo" onclick="toggleOverlay(false)">Code promo</a>
+        <div style="margin-top:18px; display:flex; gap:10px;">
+          <button class="btn btn-primary" onclick="scrollToSection('inscription')">S'inscrire</button>
+          <button class="btn btn-accent" onclick="copyPromo()">Get Code</button>
+        </div>
+      </nav>
     </div>
   </header>
 
-  <!-- ================== HERO ================== -->
   <main>
-    <section class="hero container" aria-labelledby="hero-heading">
-      <div class="hero-card float-card fade-in" role="region" aria-label="Présentation de l'événement">
+
+    <!-- ================== HERO ================== -->
+    <section class="hero container" id="hero" aria-labelledby="hero-title">
+      <div class="hero-card fade-up" role="region">
         <span class="kicker">Événement officiel</span>
-        <h1 id="hero-heading">Taptap Dayz — Rapprocher la diaspora, célébrer la communauté</h1>
-        <p class="lead">Une foire multifilière + une marche sportive pour réunir familles, entrepreneurs, influenceurs et la diaspora. Ateliers, stands, musique live et opportunités pour essayer Taptap Send — et gagner un bonus avec <strong>#TAPTAPDAYZ237</strong>.</p>
+        <h1 id="hero-title">Taptap Dayz — Rapprocher la diaspora, célébrer la communauté</h1>
+        <p class="lead">Foire multi-sectorielle + marche sportive : stands, ateliers, démonstrations Taptap Send et un code promo exclusif <strong>#TAPTAPDAYZ237</strong>.</p>
 
-        <div class="cta-row" style="margin-top:12px">
-          <button class="btn" onclick="scrollToSection('inscription')"><i class="fa fa-ticket"></i> Je m'inscris</button>
-          <button class="btn secondary" onclick="scrollToSection('promo')"><i class="fa fa-gift"></i> Recevez votre code promo</button>
-        </div>
+        <div class="grid-2-responsive" style="margin-top:12px">
+          <div>
+            <div class="cta-row">
+              <button class="btn btn-primary" onclick="scrollToSection('inscription')"><i class="fa fa-ticket"></i> Je m'inscris</button>
+              <button class="btn btn-outline" onclick="scrollToSection('promo')"><i class="fa fa-gift"></i> Voir le promo</button>
+              <button class="btn btn-accent" onclick="copyPromo()"><i class="fa fa-copy"></i> Copier code</button>
+            </div>
 
-        <div style="margin-top:18px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
-          <div class="countdown" aria-hidden="false" id="countdown" title="Compte à rebours">
-            <div class="slot"><div class="num" id="cd-days">10</div><div class="lbl">JOURS</div></div>
-            <div class="slot"><div class="num" id="cd-hours">00</div><div class="lbl">HEURES</div></div>
-            <div class="slot"><div class="num" id="cd-mins">00</div><div class="lbl">MIN</div></div>
-            <div class="slot"><div class="num" id="cd-secs">00</div><div class="lbl">SEC</div></div>
+            <div style="margin-top:14px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+              <div>
+                <div style="font-size:.85rem;color:var(--muted)">Lieu</div>
+                <div style="font-weight:800">Parc Central, Yaoundé</div>
+              </div>
+
+              <div style="margin-left:auto;">
+                <div style="font-size:.85rem;color:var(--muted);">Événement dans</div>
+                <div class="countdown" aria-live="polite" aria-atomic="true">
+                  <div class="slot"><div class="num" id="cd-days">--</div><div class="lbl">Jours</div></div>
+                  <div class="slot"><div class="num" id="cd-hours">--</div><div class="lbl">Heures</div></div>
+                  <div class="slot"><div class="num" id="cd-mins">--</div><div class="lbl">Min</div></div>
+                  <div class="slot"><div class="num" id="cd-secs">--</div><div class="lbl">Sec</div></div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div style="text-align:right">
-            <div style="font-size:.85rem;color:var(--muted)">Lieu</div>
-            <div style="font-weight:800">Parc Central, Yaoundé</div>
-          </div>
+          <aside class="promo-card" aria-label="Promo card">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+              <div>
+                <div style="font-size:.85rem;color:var(--muted)">Code exclusif</div>
+                <div class="promo-code" id="promoCode">#TAPTAPDAYZ237</div>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button class="btn btn-primary" onclick="copyPromo()">Copy</button>
+                <button class="btn btn-outline" onclick="sharePromo()">Share</button>
+              </div>
+            </div>
+
+            <p class="small" style="margin-top:12px">Mini-steps: 1) Téléchargez Taptap Send 2) Entrez le code 3) Recevez 5€</p>
+
+            <div style="margin-top:10px;">
+              <button class="btn btn-accent" onclick="openTutorial()"><i class="fa fa-play"></i> Voir Tutoriel</button>
+            </div>
+
+          </aside>
         </div>
       </div>
 
-      <!-- right column: promo / microsite -->
-      <aside class="promo fade-in" role="complementary" aria-label="Promotion et code">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <div style="font-size:.85rem;color:var(--muted)">Code exclusif</div>
-            <div class="promo-code" id="promoCode">#TAPTAPDAYZ237</div>
-          </div>
-          <div>
-            <button class="btn" onclick="copyPromo()"><i class="fa fa-copy"></i> Copier</button>
-          </div>
-        </div>
-
-        <p class="small" style="margin-top:12px">Mini-site promo : 3 étapes simples pour récupérer 5€ bonus.</p>
-
-        <div style="margin-top:12px" class="promo-steps">
-          <div class="step">
-            <strong>1.</strong> Téléchargez l'app Taptap Send (Android / iOS).
-          </div>
-          <div class="step">
-            <strong>2.</strong> Créez un compte et entrez <strong>#TAPTAPDAYZ237</strong>.
-          </div>
-          <div class="step">
-            <strong>3.</strong> Recevez <strong>5€</strong> crédités après validation.
-          </div>
-        </div>
-
-        <div style="margin-top:14px; display:flex; gap:8px; align-items:center;">
-          <button class="btn" onclick="openTutorial()"><i class="fa fa-play"></i> Voir le tutoriel</button>
-          <button class="btn secondary" onclick="scrollToSection('inscription')">S'inscrire à l'événement</button>
-        </div>
-
-        <hr style="opacity:.06;margin:16px 0" />
-
-        <div>
-          <div style="font-weight:800">Témoignages — Yaoundé</div>
-          <div class="testi" style="margin-top:8px">
-            <div class="card quote">"J'ai reçu mon bonus et l'envoi vers la France a été super simple." — Amina</div>
-            <div class="card quote">"Transfert rapide, frais transparents. Parfait pour la famille." — Paul</div>
-          </div>
-        </div>
-      </aside>
+      <!-- right column (large screens) --> 
+      <!-- intentionally left empty on mobile; sticky promo shown above on large screens -->
     </section>
 
     <!-- ================== PROGRAMME ================== -->
     <section id="programme" class="container" aria-labelledby="prog-title">
-      <h2 id="prog-title">Programme & activités</h2>
-      <p class="small">Une journée rythmée : ateliers entrepreneurs, stands commerçants, démonstrations Taptap Send, séances sportives et concert de clôture.</p>
+      <h2 id="prog-title" class="section-title">Programme & activités</h2>
+      <p class="small">Ateliers, stands, démonstrations Taptap Send, cours de bien-être et marche solidaire — un mix pratique et festif.</p>
 
-      <div class="grid-3" style="margin-top:18px">
-        <div class="card float-card">
+      <div class="grid-fit" style="margin-top:16px">
+        <article class="card fade-up">
           <h3>09:00 — Ouverture & stands</h3>
-          <p class="small">Accueil, visite des stands commerçants locaux et partenaires, découverte des offres.</p>
-        </div>
-        <div class="card float-card">
-          <h3>11:00 — Ateliers & talks</h3>
-          <p class="small">Ateliers sur l'entrepreneuriat, le transfert d'argent et l'utilisation sécurisée des applications.</p>
-        </div>
-        <div class="card float-card">
-          <h3>15:00 — Marche sportive</h3>
-          <p class="small">Marche de 5 km, open to all — santé et cohésion communautaire.</p>
-        </div>
-      </div>
+          <p class="small">Visite des exposants, découverte de produits locaux et partenaires.</p>
+          <div style="margin-top:10px"><button class="btn btn-outline" onclick="scrollToSection('inscription')">Participer</button></div>
+        </article>
 
-      <div style="margin-top:20px" class="card">
-        <h3>Indicateurs & objectifs</h3>
-        <p class="small">Nombre de participants, codes activés, volume des nouvelles transactions et taux de rétention — KPI clairs pour mesurer l'impact.</p>
+        <article class="card fade-up">
+          <h3>11:00 — Talks & Ateliers</h3>
+          <p class="small">Sessions sur transferts d'argent, fintech pour entrepreneurs et sécurité digitale.</p>
+          <div style="margin-top:10px"><button class="btn btn-primary" onclick="scrollToSection('inscription')">Réserver un siège</button></div>
+        </article>
+
+        <article class="card fade-up">
+          <h3>15:00 — Marche sportive (5 km)</h3>
+          <p class="small">Ouvert à tous — inscrivez-vous et récupérez votre dossard.</p>
+          <div style="margin-top:10px"><button class="btn btn-accent" onclick="scrollToSection('inscription')">S'inscrire</button></div>
+        </article>
       </div>
     </section>
 
     <!-- ================== INTERVENANTS ================== -->
     <section id="intervenants" class="container" aria-labelledby="intervenants-title">
-      <h2 id="intervenants-title">Intervenants & influenceurs</h2>
-      <p class="small">Des acteurs locaux, influenceurs et experts de la diaspora viendront partager expériences et conseils.</p>
+      <h2 id="intervenants-title" class="section-title">Intervenants & influenceurs</h2>
+      <p class="small">Des experts locaux et de la diaspora, influenceurs, coachs et entrepreneurs.</p>
 
-      <div class="grid-3" style="margin-top:18px">
-        <article class="card speaker">
-          <div class="avatar">AB</div>
+      <div class="grid-fit" style="margin-top:16px">
+        <article class="card speaker fade-up">
+          <div class="avatar" aria-hidden="true">AB</div>
           <div>
             <h4>Abdou K. — Fondateur</h4>
-            <p>Parcours entrepreneurial & fintech</p>
+            <p class="small">Fintech & inclusion financière</p>
           </div>
         </article>
 
-        <article class="card speaker">
-          <div class="avatar">MJ</div>
+        <article class="card speaker fade-up">
+          <div class="avatar" aria-hidden="true">MJ</div>
           <div>
             <h4>Maya J. — Influenceuse</h4>
-            <p>Visibilité & community building</p>
+            <p class="small">Community building et storytelling</p>
           </div>
         </article>
 
-        <article class="card speaker">
-          <div class="avatar">DR</div>
+        <article class="card speaker fade-up">
+          <div class="avatar" aria-hidden="true">DR</div>
           <div>
             <h4>Dr. René — Coach sportif</h4>
-            <p>Bien-être & préparation marche</p>
+            <p class="small">Préparation et sécurité pour la marche</p>
           </div>
         </article>
       </div>
@@ -401,60 +364,60 @@
 
     <!-- ================== GALERIE ================== -->
     <section id="galerie" class="container" aria-labelledby="galerie-title">
-      <h2 id="galerie-title">Galerie photos & vidéos</h2>
-      <p class="small">Placeholders pour tes images : remplace par des photos haute-résolution de l'édition précédente, des vidéos embed, ou reels.</p>
+      <h2 id="galerie-title" class="section-title">Galerie photos & vidéos</h2>
+      <p class="small">Placeholders — remplace par tes images (optimisées, `srcset` pour le responsive).</p>
 
-      <div class="gallery" style="margin-top:14px">
-        <div class="img-placeholder">Image 1 (remplacer)</div>
-        <div class="img-placeholder">Image 2 (remplacer)</div>
-        <div class="img-placeholder">Image 3 (remplacer)</div>
-        <div class="img-placeholder">Image 4 (remplacer)</div>
-        <div class="img-placeholder">Image 5 (remplacer)</div>
-        <div class="img-placeholder">Image 6 (remplacer)</div>
+      <div class="gallery" style="margin-top:12px">
+        <div class="img-placeholder"><img alt="Stand local" src="https://via.placeholder.com/400x300?text=Remplacer" loading="lazy"></div>
+        <div class="img-placeholder"><img alt="Marche sportive" src="https://via.placeholder.com/400x300?text=Remplacer" loading="lazy"></div>
+        <div class="img-placeholder"><img alt="Atelier" src="https://via.placeholder.com/400x300?text=Remplacer" loading="lazy"></div>
+        <div class="img-placeholder"><img alt="Concert" src="https://via.placeholder.com/400x300?text=Remplacer" loading="lazy"></div>
       </div>
     </section>
 
     <!-- ================== INSCRIPTION ================== -->
     <section id="inscription" class="container" aria-labelledby="insc-title">
-      <h2 id="insc-title">Formulaire d'inscription</h2>
-      <p class="small">Inscris-toi pour recevoir ton code promo, des infos logistiques et le rappel avant l'événement.</p>
+      <h2 id="insc-title" class="section-title">Formulaire d'inscription</h2>
+      <p class="small">Inscris-toi pour recevoir ton code promo et toutes les informations logistiques.</p>
 
-      <div style="display:grid; grid-template-columns:1fr 360px; gap:18px; margin-top:14px">
-        <div class="card">
-          <form id="regForm" onsubmit="handleRegister(event)">
+      <div class="grid-fit" style="margin-top:12px">
+        <div class="card fade-up">
+          <form id="regForm" onsubmit="handleRegister(event)" aria-describedby="reg-help">
             <label for="name">Nom complet</label>
-            <input id="name" type="text" required placeholder="Nom et prénom" />
+            <input id="name" name="name" type="text" required placeholder="Nom et prénom" />
 
             <label for="email">Email</label>
-            <input id="email" type="email" required placeholder="ex: nom@exemple.com" />
+            <input id="email" name="email" type="email" required placeholder="ex: nom@exemple.com" />
 
             <label for="phone">Téléphone</label>
-            <input id="phone" type="tel" placeholder="+237 6..." />
+            <input id="phone" name="phone" type="tel" placeholder="+237 6..." />
 
             <label for="role">Vous êtes</label>
-            <select id="role">
+            <select id="role" name="role">
               <option>Participant</option>
               <option>Exposant / Marchand</option>
               <option>Influenceur / Presse</option>
             </select>
 
-            <label class="small">Souhaitez-vous recevoir le rappel par WhatsApp ?</label>
-            <div style="display:flex; gap:8px;">
-              <button type="button" class="btn secondary" onclick="openWhatsApp()">Envoyer via WhatsApp</button>
-              <button type="submit" class="btn"><i class="fa fa-check"></i> S'inscrire</button>
+            <div style="display:flex; gap:8px; margin-top:6px; flex-wrap:wrap">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> S'inscrire</button>
+              <button type="button" class="btn btn-outline" onclick="openWhatsApp()"><i class="fa fa-whatsapp"></i> WhatsApp</button>
+              <button type="button" class="btn btn-accent" onclick="copyPromo()"><i class="fa fa-ticket"></i> Obtenir code</button>
             </div>
-            <div id="regMsg" role="status" style="margin-top:8px;color:var(--muted)"></div>
+
+            <div id="regMsg" role="status" style="margin-top:8px;color:var(--muted);font-size:.95rem"></div>
+            <div id="reg-help" class="small" style="margin-top:6px">Tu recevras un e-mail avec les informations et le code promo. Les places pour ateliers sont limitées.</div>
           </form>
         </div>
 
-        <aside class="card">
+        <aside class="card fade-up">
           <h3>Infos pratiques</h3>
-          <p class="small">Date : <strong>5 Octobre 2025</strong> · Lieu : Parc Central, Yaoundé · Entrée : gratuite</p>
-          <p class="small">Contact orga : <a href="mailto:dayz@taptapsend.com">dayz@taptapsend.com</a></p>
+          <p class="small"><strong>Date :</strong> 5 Octobre 2025 · <strong>Lieu :</strong> Parc Central, Yaoundé</p>
+          <p class="small"><strong>Contact orga :</strong> <a href="mailto:dayz@taptapsend.com">dayz@taptapsend.com</a></p>
           <div style="margin-top:12px">
             <div style="font-weight:800">Pourquoi venir ?</div>
             <ul style="margin:8px 0 0; padding-left:18px; color:var(--muted)">
-              <li>Découvrir offres & services</li>
+              <li>Découverte d'offres & services</li>
               <li>Réseautage local & diaspora</li>
               <li>Bonus promo Taptap Send</li>
             </ul>
@@ -463,116 +426,131 @@
       </div>
     </section>
 
-    <!-- ================== MICROSITE PROMO (DETAILLÉ) ================== -->
+    <!-- ================== PROMO / MICROSITE ================== -->
     <section id="promo" class="container" aria-labelledby="promo-title">
-      <h2 id="promo-title">Mini-site promo — Recevez 5€ avec <span style="background:linear-gradient(90deg,var(--brand-a),var(--brand-b)); -webkit-background-clip:text; color:transparent; font-weight:900">#TAPTAPDAYZ237</span></h2>
-      <p class="small">Un micro-parcours clair pour convertir : téléchargement → inscription → code → récompense.</p>
+      <h2 id="promo-title" class="section-title">Mini-site promo — #TAPTAPDAYZ237</h2>
+      <p class="small">3 étapes simples : Téléchargez → Entrez le code → Recevez 5€.</p>
 
-      <div style="margin-top:18px" class="grid-2">
-        <div class="card">
+      <div class="grid-fit" style="margin-top:12px">
+        <div class="card fade-up">
           <h3>Tutoriel rapide</h3>
           <ol class="small">
-            <li>Téléchargez l'application Taptap Send sur Google Play ou App Store.</li>
-            <li>Ouvrez l'app et complétez la création du compte (KYC rapide).</li>
-            <li>Dans "Promotions", entrez <strong>#TAPTAPDAYZ237</strong>.</li>
-            <li>Effectuez une première transaction ou validation pour débloquer 5€.</li>
+            <li>Téléchargez l'app Taptap Send (Play Store / App Store).</li>
+            <li>Créez votre compte et validez l'identité (KYC si demandé).</li>
+            <li>Entrez <strong>#TAPTAPDAYZ237</strong> dans la section promotions et suivez les instructions.</li>
           </ol>
-          <p class="small">Note : offres et conditions peuvent être soumises à vérification d'identité.</p>
+          <p class="small">Offre sujette à conditions. Vérifie les T&Cs dans l'app.</p>
         </div>
 
-        <div class="card">
-          <h3>Témoignages locaux</h3>
-          <div style="margin-top:8px">
-            <div style="font-weight:700">Jean (Yaoundé)</div>
-            <div class="small">"Bonus reçu, procédure simple. J'ai envoyé de l'argent à ma sœur au Canada."</div>
+        <div class="card fade-up">
+          <h3>Partager le code</h3>
+          <p class="small">Copie le message ci-dessous et partage sur tes réseaux :</p>
+          <textarea readonly style="width:100%;min-height:80px;border-radius:8px;padding:12px;border:1px solid rgba(0,0,0,0.04);background:transparent;">
+Rejoins Taptap Send — utilise le code #TAPTAPDAYZ237 et reçois 5€ à l'inscription. Lien : https://taptapsend.example/event
+          </textarea>
+          <div style="margin-top:10px; display:flex; gap:8px;">
+            <button class="btn btn-primary" onclick="copyPromo()">Copier le message</button>
+            <button class="btn btn-outline" onclick="sharePromo()">Partager</button>
           </div>
         </div>
-      </div>
-
-      <div style="margin-top:18px" class="card">
-        <h3>Widget promotionnel</h3>
-        <p class="small">Copiez le code et partagez-le sur vos canaux — un court message préformaté est disponible ci-dessous.</p>
-        <textarea readonly style="width:100%;min-height:84px;border-radius:8px;padding:12px;background:transparent;color:inherit;border:1px solid rgba(255,255,255,0.03)">
-Rejoins Taptap Send — utilise le code #TAPTAPDAYZ237 et reçois 5€ à l'inscription. Lien : https://taptapsend.example/event
-        </textarea>
       </div>
     </section>
 
-    <!-- ================== FOOTER ================== -->
-    <footer role="contentinfo">
-      <div class="footer-grid">
-        <div>
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px">
-            <div class="logo-sigil" style="width:48px;height:48px">TD</div>
-            <div>
-              <div style="font-weight:800">Taptap Dayz</div>
-              <div class="small">Foire & Marche Sportive — Yaoundé</div>
-            </div>
-          </div>
-          <p class="small">Organisé par Taptap Send — rapprocher familles et échanges transfrontaliers via une expérience humaine, simple et économique.</p>
-        </div>
-
-        <div>
-          <h4>Liens utiles</h4>
-          <ul style="list-style:none;padding:0;margin:8px 0">
-            <li><a href="#programme">Programme</a></li>
-            <li><a href="#intervenants">Intervenants</a></li>
-            <li><a href="#galerie">Galerie</a></li>
-            <li><a href="#inscription">S'inscrire</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Contact & réseaux</h4>
-          <div style="margin:8px 0" class="socials">
-            <a href="#" aria-label="Facebook"><i class="fa fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fa fa-youtube"></i></a>
-          </div>
-
-          <div style="margin-top:12px">
-            <div class="small">Partenaires : Dovv, Santa Lucia</div>
-            <div style="margin-top:8px" class="small">Mentions légales · Confidentialité</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="max-width:var(--max-width); margin:18px auto 0; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:.9rem;">
-        <div>© Taptap Dayz — 2025</div>
-        <div>Design by <strong>Team</strong> · Built with ❤️</div>
-      </div>
-    </footer>
   </main>
+
+  <!-- ================== FOOTER ================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px">
+          <div class="logo" style="width:56px;height:56px">TD</div>
+          <div>
+            <div style="font-weight:800; color:var(--primary)">Taptap Dayz</div>
+            <div class="small">Foire & Marche Sportive — Yaoundé</div>
+          </div>
+        </div>
+        <p class="small">Organisé par Taptap Send — rapprocher les familles, faciliter les transferts et la communauté.</p>
+        <div style="margin-top:8px">
+          <button class="btn btn-primary" onclick="scrollToSection('inscription')">Join us</button>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="color:var(--primary)">Liens utiles</h4>
+        <ul style="list-style:none;padding:0;margin:8px 0">
+          <li><a href="#programme">Programme</a></li>
+          <li><a href="#intervenants">Intervenants</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#inscription">Inscription</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:var(--primary)">Contact & réseaux</h4>
+        <div style="display:flex; gap:8px; margin:8px 0">
+          <a href="#" aria-label="Facebook" style="display:inline-flex; align-items:center; justify-content:center; width:40px;height:40px;border-radius:8px;background:var(--secondary); color:var(--primary)"><i class="fa fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram" style="display:inline-flex; align-items:center; justify-content:center; width:40px;height:40px;border-radius:8px;background:var(--secondary); color:var(--primary)"><i class="fa fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter" style="display:inline-flex; align-items:center; justify-content:center; width:40px;height:40px;border-radius:8px;background:var(--secondary); color:var(--primary)"><i class="fa fa-twitter"></i></a>
+        </div>
+        <div class="small">Partenaires : Dovv, Santa Lucia</div>
+      </div>
+    </div>
+
+    <div style="max-width:var(--maxW); margin:18px auto 0; padding:12px 18px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:.9rem">
+      <div>© Taptap Dayz — 2025</div>
+      <div>Design by <strong>Team</strong> · Built with ❤️</div>
+    </div>
+  </footer>
+
+  <!-- ================== FLOATING CTAs ================== -->
+  <div class="floating-cta" aria-hidden="false">
+    <div class="mini" style="display:none"><button class="btn btn-primary" onclick="scrollToSection('inscription')">S'inscrire</button></div>
+    <div class="fab" title="Get code" onclick="copyPromo()" aria-label="Copier le code"><i class="fa fa-ticket"></i></div>
+  </div>
+
+  <div class="sticky-bottom-cta" role="region" aria-label="CTA mobile">
+    <div style="display:flex; gap:10px; align-items:center">
+      <div style="font-weight:800">#TAPTAPDAYZ237</div>
+      <div style="color:rgba(255,255,255,0.9); font-size:.9rem">5€ à l'inscription</div>
+    </div>
+    <div>
+      <button onclick="copyPromo()">Get code</button>
+      <button onclick="scrollToSection('inscription')">S'inscrire</button>
+    </div>
+  </div>
 
   <!-- ================== SCRIPTS ================== -->
   <script>
-    // --- Small helpers ---
-    function scrollToSection(id){
-      document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
-    }
+    // ---------- Helpers ----------
+    function scrollToSection(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth', block:'start'}); }
     function goTop(){ window.scrollTo({top:0,behavior:'smooth'}) }
 
-    // --- Mobile menu toggle ---
+    // ---------- Overlay menu ----------
+    const overlay = document.getElementById('overlayMenu');
     const hambtn = document.getElementById('hambtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hambtn?.addEventListener('click', () => {
-      const open = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = open ? 'none' : 'block';
-      hambtn.setAttribute('aria-expanded', (!open).toString());
-    });
+    function toggleOverlay(open){
+      if(open === undefined) open = !overlay.classList.contains('open');
+      overlay.classList.toggle('open', open);
+      overlay.setAttribute('aria-hidden', String(!open));
+      hambtn?.setAttribute('aria-expanded', String(open));
+    }
+    hambtn?.addEventListener('click', ()=> toggleOverlay(true));
+    function closeOverlayOnNav(){
+      document.querySelectorAll('.overlay-menu nav a').forEach(a => a.addEventListener('click', ()=> toggleOverlay(false)));
+    }
+    closeOverlayOnNav();
 
-    // --- Countdown: set to J+10 dynamic (affiche J-10 restant) ---
+    // ---------- Countdown ----------
     (function(){
       const daysEl = document.getElementById('cd-days');
       const hoursEl = document.getElementById('cd-hours');
       const minsEl = document.getElementById('cd-mins');
       const secsEl = document.getElementById('cd-secs');
 
-      // Event date set to 10 days from now by default (J-10 in copy)
+      // Set explicit event date here if you want; default: 10 days from now
       const eventDate = new Date();
       eventDate.setDate(eventDate.getDate() + 10);
-      eventDate.setHours(9,0,0,0); // morning start default
+      eventDate.setHours(9,0,0,0);
 
       function update(){
         const now = new Date();
@@ -587,89 +565,93 @@ Rejoins Taptap Send — utilise le code #TAPTAPDAYZ237 et reçois 5€ à l'insc
         secsEl.textContent = String(s).padStart(2,'0');
       }
       update();
-      setInterval(update,1000);
+      setInterval(update, 1000);
     })();
 
-    // --- Promo code copy ---
+    // ---------- Promo copy + share ----------
     function copyPromo(){
       const code = document.getElementById('promoCode').textContent.trim();
+      const message = `Use ${code} on Taptap Send and get your bonus!`;
       if(navigator.clipboard){
-        navigator.clipboard.writeText(code).then(()=> {
-          showToast('Code copié ✓');
-        }).catch(()=> {
-          fallbackCopy(code);
-        })
-      } else fallbackCopy(code);
+        navigator.clipboard.writeText(message).then(()=> showToast('Code copied ✓'));
+      } else {
+        fallbackCopy(message);
+      }
     }
     function fallbackCopy(txt){
-      const el = document.createElement('textarea');
-      el.value = txt; document.body.appendChild(el); el.select();
-      try { document.execCommand('copy'); showToast('Code copié ✓'); } catch(e){ alert('Copier manuellement: '+txt) }
-      el.remove();
+      const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); showToast('Code copied ✓'); } catch(e){ alert('Copier manuellement: ' + txt) } ta.remove();
+    }
+    function sharePromo(){
+      const url = location.href;
+      const code = document.getElementById('promoCode').textContent.trim();
+      const text = `Rejoins Taptap Send — utilise le code ${code} et reçois 5€! ${url}`;
+      if(navigator.share){
+        navigator.share({title:'Taptap Dayz', text, url}).catch(()=> showToast('Partage annulé'));
+      } else {
+        // fallback: open WhatsApp web
+        const wa = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        window.open(wa, '_blank');
+      }
     }
 
-    // --- Simple toast ---
+    // ---------- Registration (client-only demo) ----------
+    function handleRegister(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('regMsg');
+      if(!name || !email){ msg.textContent = 'Remplis ton nom et ton email.'; return; }
+      msg.textContent = 'Enregistrement...';
+      // simulate API call (replace with real POST)
+      setTimeout(()=>{
+        msg.textContent = 'Inscription confirmée — check ton email 📩';
+        showToast('Inscription confirmée');
+        e.target.reset();
+      }, 900);
+    }
+
+    // ---------- WhatsApp prefill ----------
+    function openWhatsApp(){
+      const phone = '+23700000000'; // remplace par le vrai numéro
+      const txt = `Bonjour, je souhaite m'inscrire au Taptap Dayz et recevoir le code promo #TAPTAPDAYZ237.`;
+      window.open(`https://wa.me/${phone.replace(/\\D/g,'')}?text=${encodeURIComponent(txt)}`, '_blank');
+    }
+
+    // ---------- Toast ----------
     function showToast(msg){
       const t = document.createElement('div');
       t.textContent = msg;
-      Object.assign(t.style,{position:'fixed', right:'18px', bottom:'18px', background:'var(--brand-a)', color:'white', padding:'12px 16px', borderRadius:'10px', boxShadow:'0 10px 30px rgba(0,0,0,0.4)', zIndex:9999});
+      Object.assign(t.style,{position:'fixed', right:'18px', bottom:'18px', background:'var(--primary)', color:'white', padding:'12px 16px', borderRadius:'10px', boxShadow:'0 10px 30px rgba(0,0,0,0.25)', zIndex:9999});
       document.body.appendChild(t);
       setTimeout(()=> t.style.opacity='0',1800);
       setTimeout(()=> t.remove(),2600);
     }
 
-    // --- Registration handling (client-only demo) ---
-    function handleRegister(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const role = document.getElementById('role').value;
-      // Minimal client validation
-      if(!name || !email){ document.getElementById('regMsg').textContent = 'Remplissez nom et email.'; return; }
-      document.getElementById('regMsg').textContent = 'Enregistrement...';
-      // Simulate server save and return promo code
-      setTimeout(()=> {
-        document.getElementById('regMsg').textContent = 'Inscription confirmée ! Vérifiez votre e-mail pour le code.';
-        showToast('Inscription confirmée — code envoyé ✉️');
-        // Optionally show promo code in UI
-        // Reset form
-        document.getElementById('regForm').reset();
-      }, 900);
-    }
+    // ---------- Simple in-view animations (IntersectionObserver) ----------
+    (function(){
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add('in-view'); obs.unobserve(e.target); }
+        });
+      }, {threshold:0.12});
+      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    })();
 
-    // --- WhatsApp button: open chat with prefilled message (international) ---
-    function openWhatsApp(){
-      const phone = '+23700000000'; // remplace par le numéro organisateur
-      const text = encodeURIComponent('Bonjour, je souhaite m\'inscrire au Taptap Dayz et recevoir le code promo #TAPTAPDAYZ237. Merci !');
-      window.open(`https://wa.me/${phone.replace(/\\D/g,'')}?text=${text}`, '_blank');
-    }
-
-    // --- Tutorial / microsite action ---
-    function openTutorial(){
-      // simulate modal or redirect - simple smooth scroll to promo steps
-      scrollToSection('promo');
-      showToast('Tutoriel : scrollez vers la section "Mini-site promo".');
-    }
-
-    // Accessibility: close mobile menu on nav link click
-    document.querySelectorAll('#mobileMenu a').forEach(a=> a.addEventListener('click', ()=> mobileMenu.style.display='none'));
-
-    // Add small page transition effect for anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (ev)=>{
-        // nothing heavy — smooth scroll already set
-      });
+    // ---------- Accessibility: close overlay on ESC ----------
+    window.addEventListener('keydown', (e)=> {
+      if(e.key === 'Escape') toggleOverlay(false);
     });
 
-    // Progressive enhancement: if FontAwesome kit not present, fallback to simple icons
-    (function(){
-      setTimeout(()=>{
-        if(!document.querySelector('.fa')) {
-          console.warn('FontAwesome non chargé — icônes remplacées par emoji.');
-        }
-      },1200);
-    })();
+    // ---------- Small progressive enhancement: show/hide floating mini depending on width ----------
+    function adaptFloating(){
+      const mini = document.querySelector('.floating-cta .mini');
+      if(window.innerWidth >= 900){ mini.style.display = 'block'; } else { mini.style.display = 'none'; }
+    }
+    window.addEventListener('resize', adaptFloating);
+    adaptFloating();
+
+    // ---------- Close mobile overlay on nav click (already wired) ----------
   </script>
 </body>
 </html>
