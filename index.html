@@ -67,20 +67,67 @@
       border-bottom: var(--glass-border);
       backdrop-filter: blur(6px);
     }
-    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 18px; max-width:var(--maxW); margin:0 auto}
+    .nav-inner{
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+      gap:12px; 
+      padding:12px 18px; 
+      max-width:var(--maxW); 
+      margin:0 auto;
+      flex-wrap: wrap; /* Permet le wrap pour les petits écrans */
+    }
+    .nav-inner .brand{
+      flex-shrink: 0; /* Empêche le logo de rétrécir */
+      order: 1;
+    }
+    .nav-inner .primary-nav{
+      flex: 1; /* Prend l'espace disponible */
+      order: 2;
+      display: none; /* Caché par défaut sur mobile */
+    }
+    .nav-inner .cta-compact{
+      flex-shrink: 0;
+      order: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-inner .event-info{
+      display: none; /* Caché sur mobile */
+      color:var(--muted); 
+      font-size:.9rem; 
+      white-space: nowrap;
+    }
     .brand{display:flex; align-items:center; gap:12px; cursor:pointer}
     .logo{
       width:56px; height:56px; border-radius:10px; display:grid; place-items:center;
       background: #fff; border:2px solid var(--primary); box-shadow: var(--thin-shadow);
-      font-weight:800; color:var(--primary)
+      font-weight:800; color:var(--primary);
+      flex-shrink: 0;
     }
     .brand .title{line-height:1}
     .brand .org{font-weight:800; color:var(--primary); font-size:1rem}
     .brand .tag{color:var(--muted); font-size:.85rem}
 
-    nav.primary-nav{display:flex; align-items:center; gap:10px}
-    nav ul{display:flex; gap:6px; margin:0; padding:0; list-style:none; align-items:center}
-    nav a{padding:8px 12px; border-radius:10px; transition:all .22s ease; color:var(--primary)}
+    nav.primary-nav ul{
+      display:flex; 
+      gap:6px; 
+      margin:0; 
+      padding:0; 
+      list-style:none; 
+      align-items:center;
+      flex-wrap: wrap; /* Permet le wrap des liens */
+      justify-content: center;
+    }
+    nav a{
+      padding:8px 12px; 
+      border-radius:10px; 
+      transition:all .22s ease; 
+      color:var(--primary);
+      white-space: nowrap; /* Empêche le wrap des mots dans les liens */
+      font-size: clamp(0.875rem, 2vw, 1rem); /* Responsive font-size */
+    }
     nav a:hover, nav a:focus{background:linear-gradient(90deg,var(--secondary),#eaf8ef); transform:translateY(-3px)}
 
     .cta-compact{display:flex; gap:8px; align-items:center}
@@ -88,6 +135,8 @@
       display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:10px; cursor:pointer;
       font-weight:700; letter-spacing:0.2px; border:none;
       transition:transform .22s ease, box-shadow .22s ease;
+      font-size: clamp(0.8rem, 1.5vw, 0.875rem); /* Responsive pour les boutons */
+      white-space: nowrap;
     }
     .btn-primary{background: linear-gradient(90deg,var(--primary), #005542); color:white; box-shadow: 0 10px 30px rgba(0,56,47,0.12)}
     .btn-outline{background:transparent; border:1px solid rgba(0,56,47,0.08); color:var(--primary)}
@@ -95,14 +144,30 @@
     .btn:focus{outline:3px solid rgba(183,228,197,0.25); outline-offset:2px}
 
     /* hamburger */
-    .hamburger{display:flex; align-items:center; justify-content:center; width:46px; height:46px; border-radius:10px; background:var(--glass); border:1px solid rgba(0,0,0,0.03); cursor:pointer}
+    .hamburger{display:flex; align-items:center; justify-content:center; width:46px; height:46px; border-radius:10px; background:var(--glass); border:1px solid rgba(0,0,0,0.03); cursor:pointer; flex-shrink: 0;}
     .hamburger i{font-size:18px; color:var(--primary)}
 
     /* mobile overlay menu */
-    .overlay-menu{position:fixed; inset:0; background:linear-gradient(180deg, rgba(0,56,47,0.95), rgba(0,56,47,0.96)); color:white; display:none; z-index:200; padding:28px}
-    .overlay-menu.open{display:block}
+    .overlay-menu{
+      position:fixed; 
+      inset:0; 
+      background:linear-gradient(180deg, rgba(0,56,47,0.95), rgba(0,56,47,0.96)); 
+      color:white; 
+      display:none; 
+      z-index:200; 
+      padding:28px;
+      overflow-y: auto; /* Scroll si trop de contenu */
+    }
+    .overlay-menu.open{display:block; animation: slideIn 0.3s ease-out;}
     .overlay-menu nav{margin-top:24px}
     .overlay-menu a{display:block; padding:14px 0; font-size:1.1rem; border-bottom:1px solid rgba(255,255,255,0.04)}
+    .overlay-menu .cta-row{display:flex; gap:10px; flex-direction: column; margin-top:18px;} /* CTAs en colonne sur overlay */
+    .overlay-menu .cta-row .btn{width: 100%; justify-content: center;}
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
 
     /* ---------- HERO (mobile-first) ---------- */
     .hero{
@@ -175,7 +240,10 @@
       .promo-card{position:sticky; top:92px}
       .floating-cta .mini{display:block}
       .hamburger{display:none}
-      nav.primary-nav{display:block}
+      nav.primary-nav{display:flex !important} /* Affichage forcé sur desktop */
+      .nav-inner .event-info{display:inline} /* Affichage de l'info événement */
+      .nav-inner{flex-wrap: nowrap;} /* Pas de wrap sur desktop */
+      .nav-inner .cta-compact{justify-content: flex-end;}
     }
 
     /* very large */
@@ -188,6 +256,26 @@
     @media(max-width:640px){
       .sticky-bottom-cta{display:flex}
       .floating-cta .mini{display:none}
+    }
+
+    /* Amélioration pour tablettes (768px - 900px) */
+    @media(min-width:768px) and (max-width:899px){
+      .nav-inner .primary-nav ul{justify-content: flex-start; gap: 4px;}
+      nav a{padding:6px 8px; font-size: 0.875rem;}
+      .cta-compact{gap:4px;}
+      .btn{padding:8px 12px;}
+      .nav-inner .event-info{display: none;} /* Cacher l'info sur tablettes pour gagner de l'espace */
+    }
+
+    /* Extra small screens */
+    @media(max-width:480px){
+      .nav-inner{padding:8px 12px;}
+      .brand{gap:8px;}
+      .logo{width:48px; height:48px; font-size: 1.25rem;}
+      .brand .org{font-size:0.875rem;}
+      .brand .tag{font-size:0.75rem; display: none;} /* Cacher le tag sur très petits écrans */
+      .btn{padding:8px 12px; font-size: 0.75rem;}
+      .hamburger{width:40px; height:40px;}
     }
   </style>
 </head>
@@ -215,7 +303,7 @@
       </nav>
 
       <div class="cta-compact">
-        <div class="hide-mobile small" style="color:var(--muted); font-size:.9rem">19 Sept. 2025 · College Vogt</div>
+        <div class="event-info hide-mobile" style="color:var(--muted); font-size:.9rem">19 Dec. 2025 · College Vogt</div>
         <button class="btn btn-outline" onclick="scrollToSection('inscription')" aria-label="S'inscrire">S'inscrire</button>
         <button class="btn btn-primary" onclick="copyPromo()" aria-label="Copier le code promo">Get Code</button>
         <div class="hamburger" id="hambtn" aria-label="Menu" aria-expanded="false"><i class="fa fa-bars"></i></div>
@@ -224,9 +312,15 @@
 
     <!-- Overlay mobile menu -->
     <div id="overlayMenu" class="overlay-menu" aria-hidden="true">
-      <div style="display:flex; justify-content:space-between; align-items:center">
-        <div style="display:flex; gap:12px; align-items:center"><div class="logo" style="width:48px;height:48px">TD</div><div><strong>Taptap Dayz</strong><div style="font-size:.85rem;color:rgba(255,255,255,0.85)">Yaoundé · 5 Oct</div></div></div>
-        <button onclick="toggleOverlay(false)" style="background:transparent;border:0;color:white;font-size:20px" aria-label="Fermer le menu"><i class="fa fa-times"></i></button>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
+        <div style="display:flex; gap:12px; align-items:center">
+          <div class="logo" style="width:48px;height:48px">TD</div>
+          <div>
+            <strong style="font-size: 1.25rem;">Taptap Dayz</strong>
+            <div style="font-size:.85rem;color:rgba(255,255,255,0.85)">Yaoundé · 19 Dec 2025</div>
+          </div>
+        </div>
+        <button onclick="toggleOverlay(false)" style="background:transparent;border:0;color:white;font-size:20px; flex-shrink: 0;" aria-label="Fermer le menu"><i class="fa fa-times"></i></button>
       </div>
 
       <nav aria-label="Menu mobile">
@@ -235,7 +329,7 @@
         <a href="#galerie" onclick="toggleOverlay(false)">Galerie</a>
         <a href="#inscription" onclick="toggleOverlay(false)">Inscription</a>
         <a href="#promo" onclick="toggleOverlay(false)">Code promo</a>
-        <div style="margin-top:18px; display:flex; gap:10px;">
+        <div class="cta-row">
           <button class="btn btn-primary" onclick="scrollToSection('inscription')">S'inscrire</button>
           <button class="btn btn-accent" onclick="copyPromo()">Get Code</button>
         </div>
@@ -546,18 +640,15 @@ Rejoins Taptap Send — utilise le code #TAPTAPDAYZ237 et reçois 5€ à l'insc
       const minsEl = document.getElementById('cd-mins');
       const secsEl = document.getElementById('cd-secs');
 
-      // Set explicit event date here if you want; default: 10 days from now
-      const eventDate = new Date();
-      eventDate.setDate(eventDate.getDate() + 85);
-      eventDate.setHours(9,0,0,0);
-
+      // Set explicit event date: 19 Dec 2025
+      const eventDate = new Date('2025-12-19T09:00:00');
       function update(){
         const now = new Date();
         const diff = Math.max(0, eventDate - now);
         const d = Math.floor(diff / (1000 * 60 * 60 * 24) );
-      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((diff % (1000 * 60)) / 1000);
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
 
         daysEl.textContent = String(d).padStart(2,'0');
         hoursEl.textContent = String(h).padStart(2,'0');
