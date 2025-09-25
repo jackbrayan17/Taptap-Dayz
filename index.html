@@ -540,32 +540,33 @@ Rejoins Taptap Send — utilise le code #TAPTAPDAYZ237 et reçois 5€ à l'insc
     closeOverlayOnNav();
 
     // ---------- Countdown ----------
-    (function(){
-      const daysEl = document.getElementById('cd-days');
-      const hoursEl = document.getElementById('cd-hours');
-      const minsEl = document.getElementById('cd-mins');
-      const secsEl = document.getElementById('cd-secs');
+    // 📅 Date de l'événement : 19 décembre de l'année en cours
+    const currentYear = new Date().getFullYear();
+    const eventDate = new Date(`${currentYear}-12-19T00:00:00`).getTime();
 
-      // Set explicit event date here if you want; default: 10 days from now
-      const eventDate = new Date();
-      eventDate.setDate(eventDate.getDate() + 10);
-      eventDate.setHours(9,0,0,0);
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minsEl = document.getElementById("minutes");
+    const secsEl = document.getElementById("seconds");
 
-      function update(){
-        const now = new Date();
-        const diff = Math.max(0, eventDate - now);
-        const d = Math.floor(diff / (1000*60*60*24));
-        const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-        const s = Math.floor((diff % (1000*60)) / 1000);
-        daysEl.textContent = String(d).padStart(2,'0');
-        hoursEl.textContent = String(h).padStart(2,'0');
-        minsEl.textContent = String(m).padStart(2,'0');
-        secsEl.textContent = String(s).padStart(2,'0');
-      }
-      update();
-      setInterval(update, 1000);
-    })();
+    function update() {
+      const now = new Date().getTime();
+      const diff = Math.max(0, eventDate - now);
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      daysEl.textContent = String(d).padStart(2, "0");
+      hoursEl.textContent = String(h).padStart(2, "0");
+      minsEl.textContent = String(m).padStart(2, "0");
+      secsEl.textContent = String(s).padStart(2, "0");
+    }
+
+    update(); // premier appel direct
+    setInterval(update, 1000); // mise à jour chaque seconde
+  })();
 
     // ---------- Promo copy + share ----------
     function copyPromo(){
